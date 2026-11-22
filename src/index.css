@@ -1,0 +1,199 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter";
+
+/* The built app is committed in dist/: Tailwind must not scan it (it would scrape class-like words out
+   of the old minified bundle), or every build would differ from a clean one. */
+@source not "../dist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Inter Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-status-good: var(--status-good);
+    --color-status-warning: var(--status-warning);
+    --color-status-warning-fg: var(--status-warning-fg);
+    --color-status-serious: var(--status-serious);
+    --color-status-serious-fg: var(--status-serious-fg);
+    --color-status-critical: var(--status-critical);
+    --color-status-neutral: var(--status-neutral);
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    /* One calm accent (design-system/thesis-research-agent/MASTER.md, "How the web app applies this"):
+       teal-700 with white text, 5.5:1. */
+    --primary: #0f766e;
+    --primary-foreground: #ffffff;
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.52 0 0);   /* >= 4.5:1 on white and on --muted (0.556 was 4.3:1 on --muted) */
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.505 0.213 27.518);   /* red-700: red text on its 10% tint stays >= 4.5:1 */
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.88 0 0);   /* a field's edge at 3:1-ish against white is easier to find than 0.922 */
+    --ring: #0f766e;
+    /* Data colours: the dataviz reference palette (slots in fixed order; chart-3/4/5 darkened to reach
+       3:1 on white, since they are the only cue in graph borders and underlines), and the reserved
+       status colours, which always come with an icon and a label. --status-warning is for fills and
+       tints; --status-warning-fg / --status-serious-fg for an icon, line or text on the page background. */
+    --chart-1: #2a78d6;
+    --chart-2: #eb6834;
+    --chart-3: #149066;
+    --chart-4: #b07800;
+    --chart-5: #c94f80;
+    --status-good: #0ca30c;
+    --status-warning: #fab219;
+    --status-warning-fg: #a16207;
+    --status-serious: #ec835a;
+    --status-serious-fg: #b4532a; /* 5:1 on white */
+    --status-critical: #d03b3b;
+    --status-neutral: #898781;
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: #0f766e;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: #0f766e;
+    /* motion: colour and hover changes, and a new step or panel arriving */
+    --motion-fast: 150ms;
+    --motion-base: 200ms;
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: #2dd4bf;   /* teal-400 with teal-950 text */
+    --primary-foreground: #042f2e;
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: #2dd4bf;
+    --chart-1: #3987e5;
+    --chart-2: #d95926;
+    --chart-3: #199e70;
+    --chart-4: #c98500;
+    --chart-5: #d55181;
+    --status-critical: #f06262;
+    --status-warning-fg: #fab219;
+    --status-serious-fg: #ec835a;
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: #2dd4bf;
+    --sidebar-primary-foreground: #042f2e;
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: #2dd4bf;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring;
+    }
+  /* A visible focus outline for controls without a shadcn focus ring of their own (plain links,
+     summaries, native buttons and checkboxes); zero specificity, so a component's own focus style wins. */
+  :where(a, button, summary, input, [role="button"], [tabindex]):focus-visible {
+    @apply outline-2 outline-offset-2;
+  }
+  /* A disclosure's summary is a control: a pointer and at least 24px of height (WCAG 2.5.8), even in 12px text. */
+  :where(summary) {
+    @apply cursor-pointer py-1;
+  }
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"])) {
+    @apply cursor-pointer;
+  }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+  /* prefers-reduced-motion: no movement anywhere (tw-animate's enter/exit, transitions, the live dot); the end
+     state is shown at once. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* React Flow (knowledge graph) in the app's colours, light and dark. */
+.react-flow {
+  --xy-background-color: var(--background);
+  --xy-background-pattern-color: var(--border);
+  --xy-edge-stroke-default: var(--muted-foreground);
+  --xy-edge-stroke-selected-default: var(--foreground);
+  --xy-edge-label-background-color-default: var(--background);
+  --xy-edge-label-color-default: var(--foreground);
+  --xy-minimap-background-color-default: var(--card);
+  --xy-controls-button-background-color-default: var(--card);
+  --xy-controls-button-background-color-hover-default: var(--muted);
+  --xy-controls-button-color-default: var(--foreground);
+  --xy-controls-button-border-color-default: var(--border);
+  --xy-attribution-background-color-default: transparent;
+}
