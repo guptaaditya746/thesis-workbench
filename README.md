@@ -23,4 +23,6 @@ The dev server expects the backend API at `http://127.0.0.1:8080` (in the thesis
 | `npm run build` | `tsc -b` + `dist/` (not committed; build it before `webapp serve`) |
 
 In the thesis repo, Node can come from the `frontend` uv group: `uv run --group frontend npm ci`.
+How baseline runs (PaperQA2, long context) are shown next to evqa: `docs/baselines.md`.
+
 The server reads `dist/` from `WEBAPP_DIST` (default `<thesis repo>/frontend/dist`).
